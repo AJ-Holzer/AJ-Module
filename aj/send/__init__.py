@@ -1,3 +1,3 @@
-from .send_data import send_data
+from .send_data import send_file, send_embed
 
-__all__ = ["send_data"]
+__all__ = ["send_file", "send_embed"]

