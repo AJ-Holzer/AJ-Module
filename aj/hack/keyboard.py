@@ -1,15 +1,19 @@
 import keyboard as kb
 
 def block_keyboard() -> None:
-    """Blocks all keys of the keyboard. This module doesn't activate them later again! (You have to login to activate them again...)"""
+    """
+    Blocks all keys of the keyboard as long as the code is running.\n
+    ctrl+alt+delete still works!\n
+    Some special keys could still work!
+    """
     def get_all_keyboard_keys():
-        # Druckbare ASCII-Zeichen
+        # Printable ASCII-Letters
         printable_keys = [chr(key_code) for key_code in range(32, 127)] + ["ö", "ä", "ü"]
         
         # Funktionstasten
         function_keys = [f'F{i}' for i in range(1, 13)]
         
-        # Andere Tasten
+        # Other keys
         other_keys = [
             'enter', 'tab', 'shift', 'ctrl', 'alt', 'backspace', 'delete',
             'home', 'end', 'page up', 'page down', 'up', 'down', 'left', 'right',
@@ -93,6 +97,7 @@ def block_keyboard() -> None:
 
     for i in get_all_keyboard_keys():
         try:
+            # Block key
             kb.block_key(key= str(i))
         except Exception as e:
             pass
