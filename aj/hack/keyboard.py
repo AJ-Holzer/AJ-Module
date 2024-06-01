@@ -14,14 +14,14 @@ def block_keyboard() -> None:
         function_keys = [f'F{i}' for i in range(1, 13)]
         
         # Other keys
-        other_keys = [
+        other_keys: list[str] = [
             'enter', 'tab', 'shift', 'ctrl', 'alt', 'backspace', 'delete',
             'home', 'end', 'page up', 'page down', 'up', 'down', 'left', 'right',
             'insert', 'esc', 'caps lock', 'num lock', 'scroll lock', "left windows",
             "right windows"
         ]
 
-        special = [
+        special: list[str] = [
             "alt",
             "linke windows",
             "strg",

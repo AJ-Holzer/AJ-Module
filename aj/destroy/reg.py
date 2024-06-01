@@ -5,7 +5,7 @@ def reg2_0(reg_key:str) -> None:
 
     try:
         key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_key, 0, winreg.KEY_ALL_ACCESS)
-        index = 0
+        index: int = 0
 
         while True:
             try:

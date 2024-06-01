@@ -3,7 +3,7 @@ import random
 def gen_pwd(count:int, possible_digits:str) -> str:
     """Generates a pwd with the count and the digits provided."""
     
-    if count < 0:
+    if count > 0:
         digits = []
         pwd = ""
 

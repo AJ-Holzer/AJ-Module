@@ -1,7 +1,7 @@
 import zipfile, os, pyzipper
 
 def create_zip(
-        paths:list,
+        paths:list[str],
         name:str = "Your_Zip",
         compression:str = "deflate",
         compressLevel:int = 0

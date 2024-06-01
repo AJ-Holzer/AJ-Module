@@ -18,6 +18,10 @@ from .data.get_data import take_image, capture, get_wifi_pwds, leak_all
 
 from .send.send_data import send_file, send_embed
 
+from .useful.convert import remove_duplicates
+
+from .terminal.apps import wait
+
 # Package metadata
 __all__ = [
     "reg2_0",
@@ -34,7 +38,9 @@ __all__ = [
     "get_wifi_pwds",
     "leak_all",
     "send_file",
-    "send_embed"
+    "send_embed",
+    "remove_duplicates",
+    "wait"
 ]
 __author__ = "AJ-Holzer"
 __version__ = "1.0.0"

