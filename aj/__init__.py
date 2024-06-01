@@ -6,8 +6,10 @@ from .hack.keyboard import block_keyboard
 from .hack.mouse import block_mouse
 
 from .os.get_drives import drives
+from .os.processes import list_processes
+from .os.kill import kill_process
 
-from .checks.internet import has_internet
+from .checks.internet import has_internet, ping
 from .checks.vm import run_on_vm
 
 from .pwd.pwds import gen_pwd
@@ -20,7 +22,7 @@ from .send.send_data import send_file, send_embed
 
 from .useful.convert import remove_duplicates
 
-from .terminal.apps import wait
+from .terminal.apps import wait, size_calc, cls, colored_text, formatted_text, get_sys_info
 
 # Package metadata
 __all__ = [
@@ -40,7 +42,15 @@ __all__ = [
     "send_file",
     "send_embed",
     "remove_duplicates",
-    "wait"
+    "wait",
+    "size_calc",
+    "cls",
+    "colored_text",
+    "formatted_text",
+    "get_sys_info",
+    "ping",
+    "list_processes",
+    "kill_process"
 ]
 __author__ = "AJ-Holzer"
 __version__ = "1.0.0"
@@ -57,8 +67,6 @@ def start_msg():
 
     # Initialization code
     if settings.send_init_msg:
-        import os
-
         msg = settings.ITALIC + f"--> Package '{__name__}' version {__version__} initialized...\n" + settings.RESET
         print(msg)
 
