@@ -9,8 +9,11 @@ from .hack.mouse import block_mouse
 from .os.get_drives import drives
 from .os.processes import list_processes
 from .os.kill import kill_process
+from .os.ressources import get_system_resources
+from .os.disk import get_disk_info
+from .os.batt import get_battery_status
 'Checks'
-from .checks.internet import has_internet, ping
+from .checks.internet import has_internet, ping, check_open_port
 from .checks.vm import run_on_vm
 'PWD'
 from .pwd.pwds import gen_pwd
@@ -51,10 +54,14 @@ __all__ = [
     "get_sys_info",
     "ping",
     "list_processes",
-    "kill_process"
+    "kill_process",
+    "check_open_port",
+    "get_system_resources",
+    "get_disk_info",
+    "get_battery_status"
 ]
 __author__ = "AJ-Holzer"
-__version__ = "1.0.0"
+__version__ = "1.0.4"
 __status__ = "Development"
 __license__ = "MIT"
 __description__ = "This is a module which allows you to modify a pc or doing just some little things."

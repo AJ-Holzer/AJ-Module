@@ -13,3 +13,10 @@ def ping(target_ip: str) -> str:
     """Pings a target IP address and returns the result."""
     response: str = os.system("ping " + target_ip)
     return response
+
+def check_open_port(host_ip: str, port: int, timeout: float = 5) -> bool:
+    """Checks if a specific port is opened on the host ip."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(timeout)
+        result = sock.connect_ex((host_ip, port))
+        return result == 0
