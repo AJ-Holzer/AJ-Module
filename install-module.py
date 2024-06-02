@@ -1,8 +1,21 @@
-import os, sys, shutil
+import os, sys, shutil, subprocess
 
-def get_python_version():
-    version = sys.version.replace(".", "")[:3:]
+def get_python_version() -> str:
+    version: str = sys.version.replace(".", "")[:3:]
     return version
+
+def install_requirements(requirements_file: str) -> None:
+    try:
+        with open(requirements_file, 'r') as file:
+            modules: list[str] = file.readlines()
+            for module in modules:
+                module: str = module.strip()
+                if module:
+                    print(f"\nInstalling module: {module}")
+                    subprocess.run(['pip', 'install', module])
+        print("All modules installed successfully!")
+    except FileNotFoundError:
+        print(f"Error: {requirements_file} not found.")
 
 def install():
     destination = f"C:/Users/{os.getenv("username")}/AppData/Local/Programs/Python/Python{get_python_version()}/Lib/site-packages"
@@ -48,6 +61,7 @@ def cleanup(root_dir: str) -> None:
                 print(f"Failed to remove {pycache_dir}: {e}")
 
 def main():
+    install_requirements(requirements_file="aj/requirements.txt")
     cleanup(root_dir="aj")
     install()
 
