@@ -1,4 +1,4 @@
-import psutil, os, time
+import psutil
 
 def get_system_resources() -> dict:
     """Returns system resource usage statistics."""

@@ -1,4 +1,4 @@
-import zipfile, os, pyzipper
+import zipfile, os
 
 def create_zip(
         paths:list[str],
