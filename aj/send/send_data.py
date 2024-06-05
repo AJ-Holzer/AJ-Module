@@ -20,11 +20,11 @@ def send_file(
         
 def send_embed(
         url: str,
-        embed: json # title, description, color, fields
+        embed # title, description, color, fields
 ):
     """
     Sends an embed to a discord webhook.\n
-    embed example:
+    embed example (Has to be in json format!):
         embed = {
             "title": "TITLE",
             "description": "DESCRIPTION",

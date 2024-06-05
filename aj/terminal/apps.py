@@ -9,7 +9,7 @@ def wait(msg: str = "Press any key to continue...") -> bytes:
 def size_calc(unit: str, file: str, decimal_place: int = 1) -> float:
     """
     Calculates the size and returns it as specific unit.\n
-    Supported units: b, kb, mb, gb, tb
+    Supported units: b, kb, mb, gb, tb, pb, eb
     """
     possible_sizes: dict = {
         "b": 1,           # bytes
@@ -36,16 +36,17 @@ def cls() -> None:
 def colored_text(text: str, color: str) -> str:
     """
     Returns the colored text.\n
-    Supported colors: red, green, yellow, blue, magenta, cyan, white
+    Supported colors: red, green, yellow, blue, magenta, cyan, white, gray
     """
     colors: dict[str, str] = {
-        "red": "\033[91m",
-        "green": "\033[92m",
-        "yellow": "\033[93m",
-        "blue": "\033[94m",
+        "gray":    "\033[90m",
+        "red":     "\033[91m",
+        "green":   "\033[92m",
+        "yellow":  "\033[93m",
+        "blue":    "\033[94m",
         "magenta": "\033[95m",
-        "cyan": "\033[96m",
-        "white": "\033[97m"
+        "cyan":    "\033[96m",
+        "white":   "\033[97m"
     }
 
     if color not in colors.keys():
@@ -55,12 +56,16 @@ def colored_text(text: str, color: str) -> str:
 
 def formatted_text(text: str, format: str) -> str:
     """
-    Returns text string formatted as bold, italic or underlined.
+    Returns text string formatted as bold, italic or underlined.\n
+    Supports: bold, italic, underline, underline_double, invisible, cross_out
     """
     formats: dict[str, str] = {
-        "bold": "\033[1m",
-        "italic": "\033[3m",
-        "underline": "\033[4m"
+        "bold":             "\033[1m",
+        "italic":           "\033[3m",
+        "underline":        "\033[4m",
+        "invisible":        "\033[8m",
+        "cross_out":        "\033[9m",
+        "underline_double": "\033[21m"
     }
 
     if not format in formats.keys():

@@ -89,8 +89,8 @@ def block_keyboard() -> None:
             "sleep",
             "volume_mute",
             "volume_down",
-            "volume_up",
-        ]
+            "volume_up"
+            ]
         
         all_keys = printable_keys + function_keys + other_keys + special
         return all_keys

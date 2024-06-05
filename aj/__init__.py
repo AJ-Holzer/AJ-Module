@@ -73,7 +73,7 @@ def start_msg():
 
     # Initialization code
     if settings.send_init_msg:
-        msg = settings.ITALIC + f"--> Package '{__name__}' version {__version__} initialized...\n" + settings.RESET
+        msg = settings.green + settings.ITALIC + f"--> Package '{__name__}' version {__version__} initialized...\n" + settings.RESET + settings.white
         print(msg)
 
 start_msg()

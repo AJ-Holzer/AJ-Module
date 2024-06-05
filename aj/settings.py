@@ -5,5 +5,7 @@ class Settings:
         self.send_init_msg: bool = True # If true --> The package will print, that it is initialized.
         self.ITALIC: str = "\033[3m"
         self.RESET: str = "\033[0m"
+        self.green: str = "\033[92m"
+        self.white: str = "\033[97m"
 
 settings = Settings()

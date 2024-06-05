@@ -11,7 +11,7 @@ def has_internet(host: str = "8.8.8.8", port: int = 53, timeout: int = 3) -> boo
 
 def ping(target_ip: str) -> str:
     """Pings a target IP address and returns the result."""
-    response: str = os.system("ping " + target_ip)
+    response: str = str(os.system("ping " + target_ip))
     return response
 
 def check_open_port(host_ip: str, port: int, timeout: float = 5) -> bool:
