@@ -1,7 +1,0 @@
-pyzipper
-opencv-python
-requests
-Pillow
-keyboard
-pywin32
-psutil
