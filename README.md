@@ -12,6 +12,4 @@ Please tell me in the comments if I have to add or change something to make the 
 This project is licensed under the MIT License - see the "LICENSE" file for details.
 
 ## Installation:
-Just start the "install-pgk.bat" file and let the magic do its stuff.\n
-OR\n
-Get the newer version with ´pip install aj-module´
+Just start the "install-pgk.bat" file and let the magic do its stuff. <= OR => Get the newer version with ´pip install aj-module´
