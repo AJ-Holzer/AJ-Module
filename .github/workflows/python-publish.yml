@@ -13,7 +13,7 @@ on:
     types: [published]
 
 permissions:
-  contents: upload
+  contents: read
 
 jobs:
   deploy:
