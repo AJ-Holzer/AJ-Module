@@ -1,5 +1,5 @@
 {
-    "version": "1.0.38",
+    "version": "1.1.0",
     "all": [
         "reg2_0",
         "create_env",
@@ -37,6 +37,7 @@
         "get_base_path",
         "center_ctk",
         "simple_test",
-        "yes_no_window"
+        "yes_no_window",
+        "table"
     ]
 }

@@ -1,9 +1,19 @@
 """
 # AJ-Pack
-This is my little module for python.
-Just enjoy it and don't do something illegal ;) have fun <3\n
+This is my little module for python.\n
+Just enjoy it and don't do something illegal ;) have fun <3
 Check me out on [github](https://github.com/AJ-Holzer)!
 """
+
+
+#####################################################
+##                                                 ##
+##    We all know, that this code is messed up.    ##
+##    So, just ignore that...                      ##
+##    :)                                           ##
+##                                                 ##
+#####################################################
+
 
 'CTk'
 from .ctk.ctk import center_ctk
@@ -39,6 +49,7 @@ from .useful.convert import remove_duplicates
 from .useful.wait import waiter
 from .useful.shortcut import create_shortcut
 from .useful.notifications import desktop_msg
+from .useful.format import table
 'Terminal'
 from .terminal.apps import wait, size_calc, cls, colored_text, formatted_text, get_sys_info
 'Test'
@@ -83,6 +94,7 @@ __all__: list[str] = [
     "center_ctk",
     "simple_test",
     "yes_no_window",
+    "table",
 ]
 __author__ = "AJ-Holzer"
 __status__ = "Development"
