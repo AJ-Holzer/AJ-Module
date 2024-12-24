@@ -1,29 +1,41 @@
 import customtkinter as tk
 
-def yes_no_window(text: str, icon: str|None = None) -> bool:
-    """Creates a window with a yes/no question and returns the answer as a boolean"""
-    global state
+def yes_no_window(text: str, icon: str = "") -> bool:
+    """
+    Creates a ctk window with a yes/no question.
+    
+    :param text (str): The question to show on the window.
+    :param icon (str): The icon to show on the window.
+    :return (bool): The answer (yes: true, no: false).
+    """
+    # Use a local variable to store the result
+    result: bool = False
 
-    yes_no_root: tk.CTk = tk.CTk()
-    yes_no_root.title("Yes/No Question")
-    yes_no_root.geometry("300x100")
-    yes_no_root.resizable(False, False)
-    if icon: yes_no_root.iconbitmap(icon)
+    yesNoRoot: tk.CTk = tk.CTk()
+    yesNoRoot.title("Yes/No Question")
+    yesNoRoot.resizable(False, False)
+    if icon:
+        yesNoRoot.iconbitmap(icon)
 
-    state = False
+    def yes() -> None:
+        nonlocal result  # Use nonlocal to modify the variable in the enclosing scope
+        result = True
+        yesNoRoot.destroy()
 
-    def yes() -> bool: global state; yes_no_root.destroy(); state = True
-    def no() -> bool:  global state; yes_no_root.destroy(); state = False
+    def no() -> None:
+        nonlocal result  # Use nonlocal to modify the variable in the enclosing scope
+        result = False
+        yesNoRoot.destroy()
 
-    label: tk.CTkLabel = tk.CTkLabel(yes_no_root, text=text)
+    label: tk.CTkLabel = tk.CTkLabel(yesNoRoot, text=text)
     label.pack(pady=10)
 
-    yes_button: tk.CTkButton = tk.CTkButton(yes_no_root, text="yes".upper(), command=lambda: yes())
-    yes_button.pack(side="left", pady=10, padx = 10)
+    yesButton: tk.CTkButton = tk.CTkButton(yesNoRoot, text="yes".upper(), command=yes)
+    yesButton.pack(side="left", pady=10, padx=10)
 
-    no_button: tk.CTkButton = tk.CTkButton(yes_no_root, text="no".upper(), command=lambda: no())
-    no_button.pack(side="right", pady=10, padx=10)
+    noButton: tk.CTkButton = tk.CTkButton(yesNoRoot, text="no".upper(), command=no)
+    noButton.pack(side="right", pady=10, padx=10)
 
-    yes_no_root.mainloop()
+    yesNoRoot.mainloop()
 
-    return state == True
+    return result  # Return the result directly

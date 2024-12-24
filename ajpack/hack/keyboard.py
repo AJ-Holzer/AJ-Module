@@ -1,4 +1,10 @@
-import keyboard as kb
+import time
+import string
+import keyboard as kb                   #type:ignore[import-untyped]
+from pynput.keyboard import Controller  #type:ignore[import-untyped]
+
+global pressedKey
+pressedKey: str
 
 def block_keyboard() -> None:
     """
@@ -6,13 +12,12 @@ def block_keyboard() -> None:
     ctrl+alt+delete still works!\n
     Some special keys could still work!
     """
-    def get_all_keyboard_keys():
+    def get_all_keyboard_keys() -> list[str]:
         # Printable ASCII-Letters
-        printable_keys = [chr(key_code) for key_code in range(32, 127)] + ["ö", "ä", "ü"]
+        printable_keys = [i for i in string.printable + "ÄäÖöÜü"]
         
         # Funktionstasten
         function_keys = [f'F{i}' for i in range(1, 13)]
-        
         # Other keys
         other_keys: list[str] = [
             'enter', 'tab', 'shift', 'ctrl', 'alt', 'backspace', 'delete',
@@ -101,3 +106,31 @@ def block_keyboard() -> None:
             kb.block_key(key= str(i))
         except Exception as e:
             pass
+
+def keyboard_type(input: str) -> None:
+    """
+    Types the input string on the keyboard.
+
+    :param input: The string to type.
+    :return: None
+    """
+    con = Controller()
+
+    for char in input:
+        con.press(char)
+        con.release(char)
+
+def get_key_press() -> str:
+    global pressedKey
+    pressedKey = ""
+
+    def _on_press(event):
+        global pressedKey
+        pressedKey = event.name
+
+    kb.on_press(_on_press)
+
+    while not pressedKey:
+        time.sleep(0.1)
+
+    return pressedKey

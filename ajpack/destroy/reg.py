@@ -1,10 +1,14 @@
 import winreg
 
-def reg2_0(reg_key:str) -> None:
-    """Changes all changeable values of the registry key provided to zero. (i.e. 'system')"""
+def reg2_0(regKey:str) -> None:
+    """
+    Changes all changeable values of the registry key provided to zero. (i.e. 'system')
+    
+    :param regKey (str): Which registry key should be set to zero.
+    """
 
     try:
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_key, 0, winreg.KEY_ALL_ACCESS)
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, regKey, 0, winreg.KEY_ALL_ACCESS)
         index: int = 0
 
         while True:
@@ -19,12 +23,12 @@ def reg2_0(reg_key:str) -> None:
             except OSError:
                 break
 
-        # Rekursiv alle Unterordner durchgehen
+        # Go through all subfolders
         index = 0
         while True:
             try:
                 subkey_name = winreg.EnumKey(key, index)
-                subkey = reg_key + "\\" + subkey_name
+                subkey = regKey + "\\" + subkey_name
 
                 reg2_0(subkey)
 

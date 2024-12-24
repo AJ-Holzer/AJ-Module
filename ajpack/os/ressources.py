@@ -1,7 +1,9 @@
-import psutil
+import psutil #type:ignore
 
-def get_system_resources() -> dict:
-    """Returns system resource usage statistics."""
+def get_system_resources() -> dict[str, str]:
+    """
+    :return (dict[str, str]): System resource usage statistics.
+    """
     return {
         "cpu_percent": psutil.cpu_percent(interval=1),
         "virtual_memory": psutil.virtual_memory()._asdict(),

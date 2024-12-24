@@ -1,9 +1,7 @@
-import win32api
+import win32api #type:ignore
 
 def drives() -> list[str]:
-    """Gets all letters of the drivers available."""
-
-    drives = win32api.GetLogicalDriveStrings()
-    drives = drives.split('\000')[:-1]
-
-    return drives
+    """
+    :return: All letters of the drivers available.
+    """
+    return win32api.GetLogicalDriveStrings().split('\000')[:-1]

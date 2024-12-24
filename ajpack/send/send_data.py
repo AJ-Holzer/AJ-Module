@@ -1,11 +1,15 @@
-import requests, json
+import requests, json #type:ignore
+from typing import Any
 
 def send_file(
         file_path: str,
         webhook_url: str
-):
+) -> None:
     """
     Sends a file to a discord webhook.
+
+    :param file_path: The path of the file to send.
+    :param webhook_url: The webhook url of the target dc server.
     """
     with open(file_path, "rb") as f:
         # Create a dictionary of file objects to be sent to the webhook_url
@@ -20,11 +24,11 @@ def send_file(
         
 def send_embed(
         url: str,
-        embed # title, description, color, fields
-):
+        embed: dict[str, Any] # title, description, color, fields
+) -> None:
     """
     Sends an embed to a discord webhook.\n
-    embed example (Has to be in json format!):
+    embed example:
         embed = {
             "title": "TITLE",
             "description": "DESCRIPTION",
@@ -42,6 +46,9 @@ def send_embed(
                 }
             ]
         }
+
+    :param url: The embed url.
+    :param embed: The embed to be sent.
     """
     # Create the payload to send
     payload = {

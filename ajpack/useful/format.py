@@ -1,10 +1,16 @@
 from typing import Any
 
-def table(dct: dict[str|int, Any], sep: str = ":", align_l: str = "left", align_r: str = "left") -> str:
+def table(dct: dict[Any, Any], sep: str = ":", align_l: str = "left", align_r: str = "left") -> str:
     """
     Creates a table of the given dictionary.
     sep: The character which seperates the left from the right side.
     align_l / align_r: left, right, centered
+
+    :param dct: Dictionary to use (key: left side, value: right side).
+    :param sep: The seperator to use.
+    :param align_l: Where to align the left column.
+    :param align_r: Where to align the right column.
+    :return: str --> The table.
     """
     align: dict[str, str] = {
         "left": "<",
@@ -14,7 +20,6 @@ def table(dct: dict[str|int, Any], sep: str = ":", align_l: str = "left", align_
     tmp_lst: list[str] = []
     len1: int = 0
     len2: int = 0
-    LEN_DEFAULT: int = 1
 
     if not align_l in align.keys() or not align_r in align.keys(): raise ValueError("The given alignment doesn't exist!")
 

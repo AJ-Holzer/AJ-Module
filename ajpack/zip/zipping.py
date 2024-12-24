@@ -7,11 +7,12 @@ def create_zip(
         compressLevel:int = 0
     ) -> None:
     """
-    Creates a zip with the following things provided:\n
-    path           = The path which will be added to the zipfile (directory or file)\n
-    name           = path + name of the Zipfile (without the extension)\n
-    compression    = What compression type will be used ["zip", "deflate", "bzip2", "lzma"]\n
-    compressLevel  = The level of compression\n
+    Creates a zip with the following things provided.
+
+    :param path: The path which will be added to the zipfile (directory or file).
+    :param name: path + name of the Zipfile (without the extension).
+    :param compression: What compression type will be used ["zip", "deflate", "bzip2", "lzma"].
+    :param compressLevel: The level of compression.
     """
 
     # Determine the compression method
