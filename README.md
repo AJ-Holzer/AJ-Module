@@ -11,7 +11,9 @@ Or just open an issue...
 
 
 ## 📜License:
-This project is licensed under the MIT License - see the "LICENSE" file for details.
+This project is licensed under the MIT-License - see the "LICENSE" file for details.
 
 ## 💻Installation:
-Just start the "install-pgk.bat" file and let the magic do its stuff. <= OR => Get the newer version with ´pip install ajpack´
+Just start the "install-pgk.bat" file and let the magic do its stuff.
+<b>OR</b>
+Get the newer version with ´pip install ajpack´
